@@ -31,8 +31,15 @@
       border-radius: 50%;
       text-align: center;
       cursor: pointer;
-      user-select: none;
+      user-select: none; /* Prevent text selection */
+      outline: none; /* Remove focus outline */
     }
+	
+	.touch-controls:active,
+	.touch-controls:focus {
+	  outline: none; /* Prevent focus outline from appearing when clicked or tapped */
+	  box-shadow: none; /* Optionally remove any shadow effects */
+	}
 
     #touch-controls-container {
       position: absolute;
