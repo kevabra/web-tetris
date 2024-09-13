@@ -29,14 +29,12 @@ button {
   cursor: pointer;
 }
 
-#next-piece {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  border: 2px solid #555;
-  background-color: black;
-}
-
 #history-list, #leaderboard-list {
   color: gray;
+  overflow-y: scroll;
+  max-height: 300px;
+}
+
+#gamehistory-container {
+  max-height: 400px;
 }

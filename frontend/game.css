@@ -44,7 +44,8 @@ button {
   top: 10px;
   right: 10px;
   border: 2px solid #555;
-  background-color: black;
+  background-color: transparent; /* Make background transparent */
+  opacity: 0.5; /* Set transparency for the next piece */
 }
 
 .touch-controls {
