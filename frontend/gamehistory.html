@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game History</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module">
+    import BASE_URL from './config.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('back-to-dashboard-button').addEventListener('click', () => {
+        window.location.href = 'dashboard.html';
+      });
+
+      async function loadGameHistory() {
+        const token = localStorage.getItem('token');
+
+        try {
+          const response = await fetch(`${BASE_URL}/api/users/history`, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+
+          if (response.ok) {
+            const history = await response.json();
+            const historyList = document.getElementById('history-list');
+
+            history.forEach(record => {
+              const listItem = document.createElement('li');
+              listItem.textContent = `Score: ${record.score}, Level: ${record.level}, Date: ${new Date(record.date).toLocaleDateString()}`;
+              historyList.appendChild(listItem);
+            });
+          } else {
+            alert('Failed to load game history');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred');
+        }
+      }
+
+      loadGameHistory();
+    });
+  </script>
+</head>
+<body>
+  <div id="gamehistory-container">
+    <h1>Game History</h1>
+    <ul id="history-list"></ul>
+    <button id="back-to-dashboard-button">Back to Dashboard</button>
+  </div>
+</body>
+</html>

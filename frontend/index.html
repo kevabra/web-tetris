@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Screen</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="home-container">
+    <h1>Welcome to Tetris</h1>
+    <button id="register-button">Register</button>
+    <button id="login-button">Login</button>
+    <script>
+		document.getElementById('register-button').addEventListener('click', () => {
+		  window.location.href = 'register.html'; // Create this page
+		});
+
+		document.getElementById('login-button').addEventListener('click', () => {
+		  window.location.href = 'login.html'; // Create this page
+		});
+
+	</script>
+  </div>
+</body>
+</html>

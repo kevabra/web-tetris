@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tetris</title>
+  <link rel="stylesheet" href="game.css">
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="tetris" width="300" height="600"></canvas>
+    <div id="info">
+      <p>Score: <span id="score">0</span></p>
+      <p>Level: <span id="level">1</span></p>
+      <button id="control-button">Start Game</button>
+    </div>
+    <canvas id="next-piece" width="100" height="100"></canvas>
+	 <!-- Touch control buttons -->
+    <div id="touch-controls-container" class="touch-controls">
+      <div id="touch-up">⬆</div>
+      <div id="touch-left-right">
+        <div id="touch-left">⬅</div>
+        <div id="touch-right">➡</div>
+      </div>
+      <div id="touch-down">⬇</div>
+    </div>
+  </div>
+  
+  <button id="toggle-touch-controls">Enable Touch Controls</button>
+
+  <script src="game.js" type="module"></script>
+  
+ 
+
+  <!-- API calls directly in the HTML file -->
+  <script type="module">
+    import BASE_URL from './config.js';
+    // Function to update game history and leaderboard
+	// Update user game history and global leaderboard after the game is fully reset
+    async function updateGameHistoryAndLeaderboard(score, level) {
+      try {
+        // Update user game history
+        const updateHistoryResponse = await fetch(`${BASE_URL}/api/users/update-game-history`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}` // Ensure token is valid
+          },
+          body: JSON.stringify({ score, level }) // Send score and level in the request body
+        });
+
+        if (!updateHistoryResponse.ok) {
+          throw new Error('Failed to update game history');
+        }
+
+        // Update global leaderboard
+        const updateLeaderboardResponse = await fetch(`${BASE_URL}/api/scores`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}` // Ensure token is valid
+          },
+          body: JSON.stringify({ score, level })
+        });
+
+        if (!updateLeaderboardResponse.ok) {
+          throw new Error('Failed to update leaderboard');
+        }
+
+        // Optionally: Refresh leaderboard data
+        await refreshLeaderboard();
+
+      } catch (error) {
+        console.error('Error updating game history or leaderboard:', error);
+      }
+    }
+
+    // Function to refresh leaderboard data
+    async function refreshLeaderboard() {
+      try {
+        const response = await fetch(`${BASE_URL}/api/leaderboard`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch leaderboard');
+        }
+        const leaderboard = await response.json();
+        console.log('Leaderboard updated:', leaderboard);
+        // Handle leaderboard data if needed (e.g., update UI)
+      } catch (error) {
+        console.error('Error fetching leaderboard:', error);
+      }
+    }
+
+
+    }
+  </script>
+</body>
+</html>

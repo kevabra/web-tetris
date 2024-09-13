@@ -1,0 +1,26 @@
+When replacing FrontEnd React with purely vanilla html, css, and jss, still must have the static html files deployed on a server (locally, it will be localhost).
+
+To do this:
+
+To ensure your static HTML files run correctly on localhost, you can use a simple static file server. Here's how you can set it up using a few different methods:
+
+1. Using a Simple Static File Server (Node.js)
+You can use the http-server package, which is a simple way to serve static files:
+
+Install http-server globally:
+
+bash
+Copy code
+npm install -g http-server
+Navigate to your frontend directory where your static HTML files are located.
+
+Start the server:
+
+bash
+Copy code
+http-server
+By default, this will serve your files at http://localhost:8080. You can specify a different port if needed:
+
+bash
+Copy code
+http-server -p 5000

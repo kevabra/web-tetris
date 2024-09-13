@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #2b2b2b;
+}
+
+#game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+#tetris {
+  background-color: black;
+  border: 2px solid #555;
+}
+
+#info {
+  margin-top: 20px;
+  color: white;
+  text-align: center;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #555;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#next-piece {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: 2px solid #555;
+  background-color: black;
+}
+
+.touch-controls {
+  display: none; /* Hidden by default */
+  position: absolute;
+  background-color: rgba(128, 128, 128, 0.7);
+  color: white;
+  font-size: 2rem;
+  padding: 10px;
+  border-radius: 50%;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+#touch-controls-container {
+  position: absolute;
+  right: -80px; /* Adjusted so that controls appear to the right of the canvas */
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#touch-up {
+  position: relative;
+}
+#touch-left,
+#touch-right,
+#touch-down {
+  position: relative;
+}
+#touch-left-right {
+  display: flex;
+  justify-content: space-between;
+  width: 150px;
+}
+#toggle-touch-controls {
+  margin-top: 20px;
+  display: block;
+}

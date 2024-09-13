@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module">
+    import BASE_URL from './config.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('back-to-dashboard-button').addEventListener('click', () => {
+        window.location.href = 'dashboard.html';
+      });
+
+      async function loadLeaderboard() {
+        try {
+          const response = await fetch(`${BASE_URL}/api/leaderboard`, {
+            method: 'GET',
+          });
+
+          if (response.ok) {
+            const leaderboard = await response.json();
+            const leaderboardList = document.getElementById('leaderboard-list');
+
+            leaderboard.forEach(record => {
+              const listItem = document.createElement('li');
+              listItem.textContent = `${record.username}: ${record.highestScore}`;
+              leaderboardList.appendChild(listItem);
+            });
+          } else {
+            alert('Failed to load leaderboard');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred');
+        }
+      }
+
+      loadLeaderboard();
+    });
+  </script>
+</head>
+<body>
+  <div id="leaderboard-container">
+    <h1>Leaderboard</h1>
+    <ul id="leaderboard-list"></ul>
+    <button id="back-to-dashboard-button">Back to Dashboard</button>
+  </div>
+</body>
+</html>

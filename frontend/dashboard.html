@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="dashboard-container">
+    <h1>Dashboard</h1>
+    <button id="logout-button">Logout</button>
+    <button id="view-history-button">Game History</button>
+    <button id="view-leaderboard-button">Leaderboard</button>
+    <button id="start-game-button">Start New Game</button>
+    <script>
+		document.getElementById('logout-button').addEventListener('click', () => {
+		  window.location.href = 'index.html'; // Redirect to home screen on logout
+		});
+
+		document.getElementById('view-history-button').addEventListener('click', () => {
+		  window.location.href = 'gamehistory.html'; // Create this page
+		});
+
+		document.getElementById('view-leaderboard-button').addEventListener('click', () => {
+		  window.location.href = 'leaderboard.html'; // Create this page
+		});
+
+		document.getElementById('start-game-button').addEventListener('click', () => {
+		  window.location.href = 'game.html'; // Start new game
+		});
+
+	</script>
+  </div>
+</body>
+</html>
